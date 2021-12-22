@@ -24,7 +24,18 @@ app.get('/tasks',(req,res)=>{
 });
 
 
-app.post('/tasks/:id',(req,res)=>{
+app.get('/filter',(req,res)=>{
+    console.log(req.query)
+    Todo.find({isCompleted: req.query.isCompleted},(err,data)=>{
+        if(err){
+            console.log("ERROR",err)
+       }else{
+           res.json(data)
+       }
+    })
+})
+
+app.post('/tasks',(req,res)=>{
     Todo.create(req.body,(err,newTask)=>{
         console.log('25',req.body)
         if(err){
