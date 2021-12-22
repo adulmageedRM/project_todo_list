@@ -9,7 +9,7 @@ const Todo=require('./todo');
 
 
 app.get('/',(req,res)=>{
-    res.json('GET / is working')
+   res.json('GET / is working')
 });
 
 
@@ -24,13 +24,44 @@ app.get('/tasks',(req,res)=>{
 });
 
 
-app.post('/tasks',(req,res)=>{
+app.post('/tasks/:id',(req,res)=>{
     Todo.create(req.body,(err,newTask)=>{
         console.log('25',req.body)
         if(err){
-            console.log('ERROR',err)
+           console.log('ERROR',err)
         }else{
            res.status(201).json(newTask)
+        }
+    });
+});
+
+app.delete('/tasks/:id',(req,res)=>{
+    console.log('30',req.params.id)
+
+    Todo.deleteOne({_id :req.params.id},(err,deleteObj)=>{
+        if(err){
+            console.log('ERROR',err)
+        }else{
+            deleteObj.deletedCount === 1
+          ? res.json("delete one todo successfully") 
+          : res.status(404).json("this todo is not found")
+        }
+    });
+});
+
+app.put('/tasks/:id',(req,res)=>{
+    console.log('10',req.params.id)
+
+   Todo.updateOne({_id :req.params.id},{title: req.body.newTitle},
+    (err,updateObj)=>{
+        if(err){
+            console.log("ERROR",err)
+            res.status(400).json(err)
+        }else{
+            console.log(updateObj)
+            updateObj.modifiedCount === 1
+          ? res.json("Ubdate one todo successfully") 
+          : res.status(404).json("this todo is not found")
         }
     });
 });
