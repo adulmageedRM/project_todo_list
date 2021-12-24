@@ -1,11 +1,16 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import axios from 'axios';
 import Todo from './components/Todo'
+import Add from './components/Add'
 import './App.css';
 
 export default function App() {
   
   const [tasks, setTasks]=useState([])
+
+useEffect(()=>{
+  getdata()
+},[])
 
   const getdata=()=>{
     axios
@@ -18,6 +23,20 @@ export default function App() {
        console.log("ERROR",err);
      });
   };
+
+  const postNewTodo=(body)=>{
+    axios
+     .post("http://localhost:5000/tasks",body)
+     .then((res)=>{
+       console.log("DATA",res.data);
+       getdata()
+       //setTasks(res.data);
+     })
+     .catch((err)=>{
+       console.log("ERROR",err);
+     });
+  };
+
   const mapOverTasks=tasks.map((taskObj,i)=>(
    <Todo key={i} task={taskObj} />
   ));
@@ -25,6 +44,7 @@ export default function App() {
   return (
     <div className="App">
      <p>app</p>
+     <Add createFunc={postNewTodo} />
      <button onClick={getdata}>GET TASKS</button>
 
      {mapOverTasks}
