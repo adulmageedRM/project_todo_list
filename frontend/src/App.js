@@ -11,7 +11,7 @@ export default function App() {
 useEffect(()=>{
   getdata()
 },[])
-
+//
   const getdata=()=>{
     axios
      .get("http://localhost:5000/tasks")
