@@ -50,8 +50,21 @@ useEffect(()=>{
      });
   };
 
+  const toggleTodo=(id,newStatus)=>{
+    axios
+     .put(`http://localhost:5000/tasks/${id}/${newStatus}`)
+     .then((res)=>{
+       console.log("DATA",res.data);
+       getdata()
+       //setTasks(res.data);
+     })
+     .catch((err)=>{
+       console.log("ERROR",err);
+     });
+  };
+
   const mapOverTasks=tasks.map((taskObj,i)=>(
-   <Todo key={i} task={taskObj} deleteTodo={deleteTodo} />
+   <Todo key={i} task={taskObj} deleteTodo={deleteTodo} toggleTodo={toggleTodo} />
   ));
 
   return (
