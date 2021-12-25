@@ -37,8 +37,21 @@ useEffect(()=>{
      });
   };
 
+  const deleteTodo=(id)=>{
+    axios
+     .delete(`http://localhost:5000/tasks/${id}`)
+     .then((res)=>{
+       console.log("DATA",res.data);
+       getdata()
+       //setTasks(res.data);
+     })
+     .catch((err)=>{
+       console.log("ERROR",err);
+     });
+  };
+
   const mapOverTasks=tasks.map((taskObj,i)=>(
-   <Todo key={i} task={taskObj} />
+   <Todo key={i} task={taskObj} deleteTodo={deleteTodo} />
   ));
 
   return (
