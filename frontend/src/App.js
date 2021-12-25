@@ -11,7 +11,7 @@ export default function App() {
 useEffect(()=>{
   getdata()
 },[])
-//
+
   const getdata=()=>{
     axios
      .get("http://localhost:5000/tasks")
@@ -23,6 +23,19 @@ useEffect(()=>{
        console.log("ERROR",err);
      });
   };
+
+  const filterData=(status)=>{
+    axios
+     .get(`http://localhost:5000/filter?isCompleted=${status}`)
+     .then((res)=>{
+       console.log("DATA",res.data);
+       setTasks(res.data);
+     })
+     .catch((err)=>{
+       console.log("ERROR",err);
+     });
+  };
+  
 
   const postNewTodo=(body)=>{
     axios
@@ -50,6 +63,19 @@ useEffect(()=>{
      });
   };
 
+  const deleteTasks=()=>{
+    axios
+     .delete(`http://localhost:5000/tasks`)
+     .then((res)=>{
+       console.log("DATA",res.data);
+       getdata()
+       //setTasks(res.data);
+     })
+     .catch((err)=>{
+       console.log("ERROR",err);
+     });
+  };
+
   const toggleTodo=(id,newStatus)=>{
     axios
      .put(`http://localhost:5000/tasks/${id}/${newStatus}`)
@@ -64,7 +90,10 @@ useEffect(()=>{
   };
 
   const mapOverTasks=tasks.map((taskObj,i)=>(
-   <Todo key={i} task={taskObj} deleteTodo={deleteTodo} toggleTodo={toggleTodo} />
+   <Todo key={taskObj._id}
+    task={taskObj}
+    deleteTodo={deleteTodo}
+    toggleTodo={toggleTodo} />
   ));
 
   return (
@@ -73,6 +102,15 @@ useEffect(()=>{
      <Add createFunc={postNewTodo} />
      <button onClick={getdata}>GET TASKS</button>
 
+     <button onClick={deleteTasks}>DELETE completed tasks</button>
+     <button onClick={()=>{
+       filterData(true)
+     }} >GET DONE</button>
+
+     <button onClick={()=>{
+       filterData(false)
+     }} >GET PENDING</button>
+     
      {mapOverTasks}
     </div>
   );
