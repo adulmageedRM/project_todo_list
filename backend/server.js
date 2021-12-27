@@ -6,14 +6,52 @@ app.use(cors());
 
 const db=require('./db');
 const Todo=require('./todo');
+const Users=require('./users');
+
 
 // console.log(Todo)
+//console.log(Users)
+
+
+app.post("/users/Register",(req,res)=>{
+    Users.create(req.body,(err,newUser)=>{
+        if (err) {
+         res.status(400).json({message:'this email already taken'});
+        } else {
+         res.status(201).json({message:'Create New User Seccessfully'})
+        }
+    });
+});
+
+app.post("/users/Login",(req,res) => {
+    Users.find({email:req.body.email},(err,arrUserfound) => {
+        if(err) {
+            res.json("ERROR", err)
+         }else{
+            if(arrUserfound.length === 1){
+                if(req.body.password === arrUserfound[0].password){
+                    res.status(200).json({
+                        message:"login successfully",
+                        username: arrUserfound[0].username
+                    })
+                }else{
+                    res.status(400).json({
+                        message:"Wrong password"
+                    })
+            }
+         } else {
+              res.status(404).json({
+                  message:"The email entred is not registered"
+              })
+            }
+            }
+    });
+});
 
 
 app.get('/',(req,res)=>{
    res.json('GET / is working')
 });
-
 
 app.get('/tasks',(req,res)=>{
     Todo.find({},(err,data)=>{

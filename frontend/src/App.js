@@ -2,6 +2,7 @@ import React, {useState,useEffect} from 'react';
 import axios from 'axios';
 import Todo from './components/Todo'
 import Add from './components/Add'
+import Register from './components/Register'
 import './App.css';
 
 export default function App() {
@@ -89,17 +90,17 @@ useEffect(()=>{
      });
   };
 
-  const mapOverTasks=tasks.map((taskObj,i)=>(
+ /* const mapOverTasks=tasks.map((taskObj,i)=>(
    <Todo key={taskObj._id}
     task={taskObj}
     deleteTodo={deleteTodo}
     toggleTodo={toggleTodo} />
-  ));
+  )); */
 
   return (
     <div className="App">
      <p>app</p>
-     <Add createFunc={postNewTodo} />
+ {/*   <Add createFunc={postNewTodo} /> */}
      <button onClick={getdata}>GET TASKS</button>
 
      <button onClick={deleteTasks}>DELETE completed tasks</button>
@@ -110,8 +111,10 @@ useEffect(()=>{
      <button onClick={()=>{
        filterData(false)
      }} >GET PENDING</button>
+
+     <Register />
      
-     {mapOverTasks}
+{/*    {mapOverTasks}  */}
     </div>
   );
 }
