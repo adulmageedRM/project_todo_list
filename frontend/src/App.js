@@ -2,6 +2,7 @@ import React, {useState,useEffect} from 'react';
 import axios from 'axios';
 import Todo from './components/Todo'
 import Add from './components/Add'
+import { Routes, Route, Link } from "react-router-dom"
 import Register from './components/Register'
 import Login from './components/Login'
 import './App.css';
@@ -9,6 +10,9 @@ import './App.css';
 export default function App() {
   
   const [tasks, setTasks]=useState([])
+
+  const [isLoggedIn, setIsLoggedIn]=useState(false)
+  const [username, setUsername]=useState("")
 
 useEffect(()=>{
   getdata()
@@ -100,7 +104,9 @@ useEffect(()=>{
 
   return (
     <div className="App">
+          <div className='Home'>
      <p>app</p>
+     <p>{username} </p>
  {/*   <Add createFunc={postNewTodo} /> */}
      <button onClick={getdata}>GET TASKS</button>
 
@@ -112,9 +118,22 @@ useEffect(()=>{
      <button onClick={()=>{
        filterData(false)
      }} >GET PENDING</button>
+     </div>
+         
+        
+       <Routes>
+         <Route path="/home" element={<p>Home</p>} />  
+         <Route path="/Register" element={<Register />} /> 
+         <Route path="/Login" element={<Login
+         setIsLoggedIn={setIsLoggedIn}
+         setUsername={setUsername} />} />
+      </Routes>
 
-     <Register />
-     <Login />
+
+
+  {/**  <Register />   */}
+
+ {/**  <Login />  */}
      
 {/*    {mapOverTasks}  */}
     </div>

@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+import { Link } from "react-router-dom"
 
-export default function(Register){
+export default function Register(){
     const [email, setEmail]=useState('abd@hotmail.com')
     const [password, setPassword]=useState('111')
     const [username, setUsername]=useState('abd')
@@ -43,7 +44,7 @@ export default function(Register){
                 }} value={username}></input>
                 <br></br>
                 <input type='submit' value='Register' onClick={registerFunc} ></input>
-
+                <Link to="/Login">have an acount? </Link>
             </form>
         </div>
     )
