@@ -45,6 +45,7 @@ export default function Register(){
                 <br></br>
                 <input type='submit' value='Register' onClick={registerFunc} ></input>
                 <Link to="/Login">have an acount? </Link>
+                
             </form>
         </div>
     )

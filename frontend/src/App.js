@@ -95,6 +95,11 @@ useEffect(()=>{
      });
   };
 
+  const logOutFun = () => {
+    setIsLoggedIn(false)
+    setUsername("")
+  }
+
  /* const mapOverTasks=tasks.map((taskObj,i)=>(
    <Todo key={taskObj._id}
     task={taskObj}
@@ -104,13 +109,26 @@ useEffect(()=>{
 
   return (
     <div className="App">
-          <div className='Home'>
-     <p>app</p>
+       <div>
+       <nav>
+           <br/>
+           <Link to='/home' >Home</Link>
+           <br/>
+           
+         </nav>
+        </div>
+        
+       <Routes>
+         <Route path="/home" element={<div className='Home'>
+     <p>Welcome to todo list</p>
+     <Link to='/Register' >Register</Link> {' || '}
+     <Link to='/Login' >Login</Link>
      <p>{username} </p>
  {/*   <Add createFunc={postNewTodo} /> */}
      <button onClick={getdata}>GET TASKS</button>
-
+     <br/>
      <button onClick={deleteTasks}>DELETE completed tasks</button>
+     <br/>
      <button onClick={()=>{
        filterData(true)
      }} >GET DONE</button>
@@ -118,19 +136,17 @@ useEffect(()=>{
      <button onClick={()=>{
        filterData(false)
      }} >GET PENDING</button>
-     </div>
-         
-        
-       <Routes>
-         <Route path="/home" element={<p>Home</p>} />  
-         <Route path="/Register" element={<Register />} /> 
+     <br/>
+     <button onClick={logOutFun} >Logout</button>
+     </div>} />  
+         <Route path="/Register" element={<Register />}/> 
          <Route path="/Login" element={<Login
          setIsLoggedIn={setIsLoggedIn}
          setUsername={setUsername} />} />
       </Routes>
+      
 
-
-
+      
   {/**  <Register />   */}
 
  {/**  <Login />  */}

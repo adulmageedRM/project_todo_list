@@ -38,6 +38,7 @@ export default function Login(props){
              <br />
              <input type='submit' value='Login' onClick={loginFunc}/>
              <Link to="/Register">Dont have an acount? </Link>
+             
            </form>
        </div>
    )
