@@ -3,6 +3,7 @@ import axios from 'axios';
 import Todo from './components/Todo'
 import Add from './components/Add'
 import Register from './components/Register'
+import Login from './components/Login'
 import './App.css';
 
 export default function App() {
@@ -113,6 +114,7 @@ useEffect(()=>{
      }} >GET PENDING</button>
 
      <Register />
+     <Login />
      
 {/*    {mapOverTasks}  */}
     </div>

@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import axios from 'axios';
 
 export default function(Register){
-    const [email, setEmail]=useState('abd@yahoo.com')
-    const [password, setPassword]=useState('1234')
+    const [email, setEmail]=useState('abd@hotmail.com')
+    const [password, setPassword]=useState('111')
     const [username, setUsername]=useState('abd')
     const registerFunc = (e) => {
         e.preventDefault();
