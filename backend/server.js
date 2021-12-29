@@ -24,27 +24,27 @@ app.post("/users/Register",(req,res)=>{
 });
 
 app.post("/users/Login",(req,res) => {
-    Users.find({email:req.body.email},(err,arrUserfound) => {
+    Users.find({email: req.body.email},(err,arrUserfound) => {
         if(err) {
             res.json("ERROR", err)
          }else{
             if(arrUserfound.length === 1){
-                if(req.body.password === arrUserfound[0].password){
+             if(req.body.password === arrUserfound[0].password){
                     res.status(200).json({
-                        message:"login successfully",
-                        username: arrUserfound[0].username
-                    })
-                }else{
-                    res.status(400).json({
-                        message:"Wrong password"
-                    })
+                     message:"login successfully",
+                     username: arrUserfound[0].username
+                    });
+            } else {
+                res.status(400).json({
+                message:"Wrong password",
+                 });
             }
-         } else {
+          } else {
               res.status(404).json({
                   message:"The email entred is not registered"
-              })
+              });
             }
-            }
+          }
     });
 });
 

@@ -100,59 +100,55 @@ useEffect(()=>{
     setUsername("")
   }
 
- /* const mapOverTasks=tasks.map((taskObj,i)=>(
+  const mapOverTasks=tasks.map((taskObj,i)=>(
    <Todo key={taskObj._id}
     task={taskObj}
     deleteTodo={deleteTodo}
     toggleTodo={toggleTodo} />
-  )); */
+  )); 
 
   return (
     <div className="App">
        <div>
-       <nav>
+         <nav>
            <br/>
-           <Link to='/home' >Home</Link>
+           <Link to='/home' >home</Link>
            <br/>
            
          </nav>
-        </div>
+       </div>
         
-       <Routes>
-         <Route path="/home" element={<div className='Home'>
-     <p>Welcome to todo list</p>
-     <Link to='/Register' >Register</Link> {' || '}
-     <Link to='/Login' >Login</Link>
-     <p>{username} </p>
- {/*   <Add createFunc={postNewTodo} /> */}
-     <button onClick={getdata}>GET TASKS</button>
-     <br/>
-     <button onClick={deleteTasks}>DELETE completed tasks</button>
-     <br/>
-     <button onClick={()=>{
-       filterData(true)
-     }} >GET DONE</button>
+     <Routes>
+       <Route path="/home" element={
+        <div className='Home'>
+         <span>Welcome to todo list</span>
+         <br/>
+         <Link to='/Register' > Register</Link> {' || '}
+         <Link to='/Login' > login</Link>
+         <p>{username} </p>
+         <Add createFunc={postNewTodo} /> 
+         <button onClick={getdata}>get tasks</button>
+         <br/>
+         <button onClick={deleteTasks}>delete completed tasks</button>
+         <br/>
+         <button onClick={()=>{
+           filterData(true)
+          }} >completed tasks</button>
 
-     <button onClick={()=>{
-       filterData(false)
-     }} >GET PENDING</button>
-     <br/>
-     <button onClick={logOutFun} >Logout</button>
-     </div>} />  
-         <Route path="/Register" element={<Register />}/> 
-         <Route path="/Login" element={<Login
+         <button onClick={()=>{
+           filterData(false)
+          }} > pending done </button>
+         <br/>
+         <button onClick={logOutFun} > log out </button>
+         {mapOverTasks}
+        </div>} />  
+       <Route path="/Register" element={<Register />}/> 
+       <Route path="/Login" element={<Login
          setIsLoggedIn={setIsLoggedIn}
          setUsername={setUsername} />} />
-      </Routes>
-      
+     </Routes>
 
-      
-  {/**  <Register />   */}
-
- {/**  <Login />  */}
-     
-{/*    {mapOverTasks}  */}
-    </div>
+  </div>
   );
 }
 
